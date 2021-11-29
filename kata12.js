@@ -69,3 +69,10 @@ recipes = [
 ];
 
 console.log(chooseRecipe(bakeryA, bakeryB, recipes));
+
+"exitCode": 128,
+  "gitErrorCode": "RemoteConnectionError",
+  "gitCommand": "push",
+  "stdout": "",
+  "stderr": "git@github.com: Permission denied (publickey).\r\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n"
+}
