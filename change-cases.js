@@ -1,112 +1,90 @@
-
-
 const makeCase = function (input, lcase) {
-  let output = "";
-  let caseType = [];
-  
-  const capitalizeString = (str) =>
-    // take string at index 0, capitalise at index 0 
-    //+ 
-    //slice string at index 1 and convert everything that follows to lowercase
-    str[0].toUpperCase() + str.slice(1).toLowerCase();
-
-  const toPascalCase = (str) =>
-    //str.split(" ") creates an array, where each item is found by the presence of empty space
-    //.map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
-    // we are using the capitalizeString function
-    //then join all of the items in the array with no spaces
-    str.split(" ").map(capitalizeString).join("");
-  
-  const toCamelCase = (str) => {
-    let text = toPascalCase(str)
-    return text[0].toLowerCase() + text.slice(1)
+  let caseArray = [].concat(lcase)
+  let arrayLength = caseArray.length
+  for (y = 0; y < arrayLength; y++) {
+    let output = input;
+    if (caseArray[y] === "camel") {
+      output = toCamelCase(output)
+    }
+    else if (caseArray[y] === "pascal") {
+      output = toPascalCase(output)
+    }
+    else if (caseArray[y] === "snake") {
+      output = toSnakeCase(output)
+    }
+    else if (caseArray[y] === "kebab") {
+      output = toKebabCase(output)
+    }
+    else if (caseArray[y] === "title") {
+      output = toTitleCase(output)
+    }
+    else if (caseArray[y] === "vowel") {
+      output = toVowelCase(output)
+    }
+    else if (caseArray[y] === "consonant") {
+      output = toConsonantCase(output)
+    }
+    else if (caseArray[y] === "upper") {
+      output = toUpperCase(output)
+    }
+    return output
   }
-
-  const toSnakeCase = (str) => 
-  str.split(" ").join("_")
-
-  const toKebabCase = (str) =>
-  str.split(" ").join("-")
-
-  const toTitleCase = (str) =>
-  capitalizeString(str)
-
-  const toVowelCase = function(str) {
+  function capitalizeString(str) {
+    return str[0].toUpperCase() + str.slice(1).toLowerCase();
+  }
+  function toPascalCase(str) {
+    return str.split(" ").map(capitalizeString).join("");
+  }
+  function toCamelCase(str) {
+    let text = toPascalCase(str);
+    return text[0].toLowerCase() + text.slice(1);
+  }
+  function toSnakeCase(str) {
+    return str.split(" ").join("_");
+  }
+  function toKebabCase(str) {
+    return str.split(" ").join("-");
+  }
+  function toTitleCase(str) {
+    return capitalizeString(str);
+  }
+  function toVowelCase(str) {
     //declare empty array called result
-    let result = []
+    let result = [];
     //declare regEx so that it captures all vowels
     let regEx = /[aeiouy]/;
     //loop through the peramiter str
-    for (let i = 0; i < str.length; i++){
+    for (let i = 0; i < str.length; i++) {
       // if test method finds a match, it returns true, otherwise it returns false.
       // we test on the peramiter's cheracter at index i (every time it loops i++)
-      if (regEx.test(str.charAt(i))){
+      if (regEx.test(str.charAt(i))) {
         //if the test is true, convert the charAt(i) to uppercase
         //then push to the result variable
-        result.push(str.charAt(i).toUpperCase()) 
+        result.push(str.charAt(i).toUpperCase());
       } else {
         //else, push the charAt(i) as is
-        result.push(str.charAt(i))
+        result.push(str.charAt(i));
       }
     }
     //return the variable result after joining it using "" or no spaces
-    return result.join("")
+    return result.join("");
   }
-
-  const toConsonantCase = function(str) {
-    let result = []
+  function toConsonantCase(str) {
+    let result = [];
     let regEx = /[bcdfghjklmnpqrstvwxys]/;
-    for (let i = 0; i < str.length; i++){
-      if (regEx.test(str.charAt(i))){
-        result.push(str.charAt(i).toUpperCase()) 
+    for (let i = 0; i < str.length; i++) {
+      if (regEx.test(str.charAt(i))) {
+        result.push(str.charAt(i).toUpperCase());
       } else {
-        result.push(str.charAt(i))
+        result.push(str.charAt(i));
       }
     }
-    return result.join("")
+    return result.join("");
   }
-
-  const toUpperCase = (str) => 
-  //replace each 'empty space' or regEx /\s+/g with "_"
-  ///\s+/g pulls each contiguous string of space characters 
-  //and ", "_" replaces that space with the "_"
-  //then everything is passed to the touppercase method
-    str.replace(/\s+/g, "_").toUpperCase();
-  
-
-
-
-  
-  if (lcase === "camel"){
-   return toCamelCase(input)
+  function toUpperCase(str) {
+    return str.replace(/\s+/g, "_").toUpperCase();
   }
-  else if (lcase == "pascal"){
-    return toPascalCase(input)
-  }
-  else if (lcase === "snake"){
-    return toSnakeCase(input)
-  }
-  else if (lcase === "kebab"){
-    return toKebabCase(input)
-  }
-  else if(lcase === "title"){
-    return toTitleCase(input)
-  }
-  else if( lcase === "vowel"){
-    return toVowelCase(input)
-  }
-  else if(lcase === "consonant"){
-    return toConsonantCase(input)
-  }
-  else if (lcase === "upper"){
-    return toUpperCase(input)
-  }
-}
-
-
-
-
-
+};
 
 
 console.log(makeCase("this is a string", "camel"));
